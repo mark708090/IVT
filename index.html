@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IVT | 圖生影片提示詞指南</title>
+  <meta name="description" content="圖生影片提示詞說明指南，整理運鏡、動作、光線、風格、台詞與聲音等提示詞寫法。">
+  <style>
+    :root {
+      --bg: #efe7da;
+      --panel: rgba(255, 252, 246, 0.9);
+      --ink: #1e1b18;
+      --muted: #63574c;
+      --line: rgba(30, 27, 24, 0.10);
+      --teal: #0e6a61;
+      --orange: #d0692c;
+      --sand: #f8f1e7;
+      --shadow: 0 24px 80px rgba(61, 41, 22, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(208, 105, 44, 0.18), transparent 24%),
+        radial-gradient(circle at 85% 15%, rgba(14, 106, 97, 0.18), transparent 22%),
+        linear-gradient(180deg, #f5eee2 0%, #eadfce 100%);
+      line-height: 1.6;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .page {
+      width: min(1100px, 100%);
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 20px;
+    }
+
+    .hero,
+    .side {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      border-radius: 30px;
+    }
+
+    .hero {
+      padding: 42px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 320px;
+      height: 320px;
+      right: -120px;
+      top: -120px;
+      background: radial-gradient(circle, rgba(14, 106, 97, 0.18), transparent 70%);
+    }
+
+    .hero::after {
+      width: 280px;
+      height: 280px;
+      left: -100px;
+      bottom: -110px;
+      background: radial-gradient(circle, rgba(208, 105, 44, 0.16), transparent 70%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(30, 27, 24, 0.05);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      margin-top: 18px;
+      font-size: clamp(40px, 6vw, 76px);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+    }
+
+    .lead {
+      margin-top: 18px;
+      max-width: 760px;
+      font-size: 18px;
+      color: var(--muted);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.10);
+    }
+
+    .button-primary {
+      background: linear-gradient(135deg, var(--teal), #0a867a);
+      color: #fff;
+    }
+
+    .button-secondary {
+      background: rgba(255, 255, 255, 0.78);
+      border-color: var(--line);
+      color: var(--ink);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(14, 106, 97, 0.10);
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .side {
+      padding: 22px;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .card {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid var(--line);
+    }
+
+    .card h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .card p,
+    .card li {
+      color: #413830;
+    }
+
+    .card ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .path {
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: #191612;
+      color: #f7f0e6;
+      font: 13px/1.6 "SFMono-Regular", "Menlo", "Consolas", monospace;
+      word-break: break-all;
+    }
+
+    .footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow">GitHub Pages Entry</div>
+      <h1>IVT</h1>
+      <p class="lead">這是圖生影片提示詞指南的 GitHub Pages 首頁入口。從這裡可以直接進入完整 HTML 指南，查看運鏡、動作、光線、風格、台詞與聲音等提示詞整理。</p>
+
+      <div class="actions">
+        <a class="button button-primary" href="./image-to-video-prompt-guide.html">進入完整指南</a>
+        <a class="button button-secondary" href="./README.md">查看 README</a>
+      </div>
+
+      <div class="chips">
+        <span class="chip">運鏡</span>
+        <span class="chip">人物動作</span>
+        <span class="chip">光線</span>
+        <span class="chip">攝影風格</span>
+        <span class="chip">台詞</span>
+        <span class="chip">聲音</span>
+      </div>
+
+      <div class="footer">如果這個倉庫已啟用 GitHub Pages，根路徑會自動載入這個頁面。</div>
+    </section>
+
+    <aside class="side">
+      <article class="card">
+        <h2>目前入口檔案</h2>
+        <p>GitHub Pages 會優先讀取根目錄的 <code>index.html</code>，所以這個頁面就是站點首頁。</p>
+        <div class="path">/Users/mark708090/Documents/ITV/index.html</div>
+      </article>
+
+      <article class="card">
+        <h2>完整內容</h2>
+        <ul>
+          <li>提示詞底層原則</li>
+          <li>英中對照術語與模板</li>
+          <li>常見錯誤與替代寫法</li>
+          <li>官方來源整理</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>啟用方式</h2>
+        <p>到 GitHub 倉庫設定的 Pages 區塊，把來源設成 <code>main</code> branch / root，儲存後就能用 Pages 網址開啟。</p>
+      </article>
+    </aside>
+  </main>
+</body>
+</html>

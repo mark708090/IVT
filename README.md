@@ -13,6 +13,7 @@
 
 ## 檔案
 
+- [index.html](./index.html)
 - [image-to-video-prompt-guide.html](./image-to-video-prompt-guide.html)
 - [LICENSE](./LICENSE)
 
@@ -25,6 +26,8 @@ open image-to-video-prompt-guide.html
 ```
 
 如果你是在沒有 `open` 指令的環境，也可以直接雙擊檔案，或用任意瀏覽器打開。
+
+如果要作為 GitHub Pages 首頁使用，根目錄的 [index.html](./index.html) 已經提供入口頁。
 
 ## 內容特色
 
@@ -43,7 +46,6 @@ open image-to-video-prompt-guide.html
 
 ## 後續可延伸
 
-- 加入 GitHub Pages，直接線上瀏覽
+- 啟用 GitHub Pages，直接線上瀏覽
 - 拆分為多頁版本或文件站
 - 追加按題材分類的提示詞庫
-
