@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>圖生影片提示詞說明指南</title>
+  <style>
+    :root {
+      --bg: #f3ede2;
+      --paper: rgba(255, 251, 244, 0.92);
+      --ink: #1e1a17;
+      --muted: #64594d;
+      --line: rgba(30, 26, 23, 0.12);
+      --accent: #0f6c63;
+      --accent-2: #d66f32;
+      --accent-3: #8d4f28;
+      --chip: rgba(15, 108, 99, 0.10);
+      --shadow: 0 20px 60px rgba(60, 42, 24, 0.12);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --max: 1240px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(214, 111, 50, 0.18), transparent 28%),
+        radial-gradient(circle at 100% 20%, rgba(15, 108, 99, 0.14), transparent 24%),
+        linear-gradient(180deg, #f5efe4 0%, #efe6d8 100%);
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .shell {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 24px auto 48px;
+    }
+
+    .hero,
+    .panel,
+    .section,
+    .footer {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .hero {
+      border-radius: 36px;
+      overflow: hidden;
+      position: relative;
+      padding: 42px;
+      min-height: 420px;
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: 28px;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 360px;
+      height: 360px;
+      right: -120px;
+      top: -120px;
+      background: radial-gradient(circle, rgba(214, 111, 50, 0.22), transparent 70%);
+    }
+
+    .hero::after {
+      width: 320px;
+      height: 320px;
+      left: -100px;
+      bottom: -120px;
+      background: radial-gradient(circle, rgba(15, 108, 99, 0.18), transparent 70%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(30, 26, 23, 0.05);
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    h1 {
+      margin-top: 18px;
+      font-size: clamp(36px, 5vw, 72px);
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      margin: 18px 0 0;
+      max-width: 820px;
+      font-size: 18px;
+      color: var(--muted);
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .info-card {
+      padding: 18px 20px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(30, 26, 23, 0.08);
+    }
+
+    .info-card strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .quick-nav {
+      position: sticky;
+      top: 14px;
+      z-index: 10;
+      margin: 18px 0 0;
+    }
+
+    .panel {
+      border-radius: 22px;
+      padding: 14px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .content {
+      display: grid;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .section {
+      border-radius: 30px;
+      padding: 30px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .section-head p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .kicker {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-3);
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .card {
+      padding: 20px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(30, 26, 23, 0.08);
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .card p,
+    .card li,
+    .table-wrap td,
+    .table-wrap th {
+      color: #3e362f;
+    }
+
+    .card ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--chip);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .formula {
+      padding: 24px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(15, 108, 99, 0.08), rgba(214, 111, 50, 0.08));
+      border: 1px solid rgba(15, 108, 99, 0.12);
+    }
+
+    .formula-line {
+      font-size: clamp(20px, 2.7vw, 32px);
+      font-weight: 800;
+      line-height: 1.35;
+      letter-spacing: -0.03em;
+    }
+
+    .note {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 20px;
+      border: 1px solid rgba(30, 26, 23, 0.08);
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+
+    th,
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(30, 26, 23, 0.08);
+      text-align: left;
+      vertical-align: top;
+      font-size: 15px;
+    }
+
+    th {
+      background: rgba(30, 26, 23, 0.04);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .prompt-block {
+      position: relative;
+      border-radius: 22px;
+      background: #191612;
+      color: #f7f0e6;
+      padding: 22px;
+      overflow: hidden;
+    }
+
+    .prompt-block pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font: 14px/1.8 "SFMono-Regular", "Menlo", "Consolas", monospace;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      border: 0;
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .copy-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .list-tight {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .list-tight li + li {
+      margin-top: 8px;
+    }
+
+    .warn {
+      border-left: 4px solid var(--accent-2);
+      padding: 14px 16px;
+      background: rgba(214, 111, 50, 0.08);
+      border-radius: 12px;
+      color: #4f4034;
+    }
+
+    .source-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .source-item {
+      padding: 16px 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(30, 26, 23, 0.08);
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .source-item small {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+    }
+
+    .footer {
+      margin-top: 18px;
+      border-radius: 22px;
+      padding: 20px 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 1080px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 820px) {
+      .shell {
+        width: min(var(--max), calc(100% - 20px));
+      }
+
+      .hero,
+      .section {
+        padding: 22px;
+      }
+
+      .grid-2,
+      .grid-3,
+      .grid-4 {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .nav-links a {
+        width: calc(50% - 5px);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .nav-links a {
+        width: 100%;
+      }
+
+      .formula-line {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Image to Video Prompting Guide</div>
+        <h1>圖生影片提示詞說明指南</h1>
+        <p>這是一份面向實際生成結果的提示詞手冊，重點解決「輸入圖已經確定後，文字還該怎麼寫」這個問題。核心思路不是重複描述圖片，而是把動態資訊補齊：鏡頭怎麼動、人物怎麼動、環境怎麼變、光線和風格怎麼推、聲音與台詞怎麼落地、以及哪些寫法會直接把結果寫壞。</p>
+        <div class="chips">
+          <span class="chip">運鏡</span>
+          <span class="chip">人物動作</span>
+          <span class="chip">光線</span>
+          <span class="chip">攝影風格</span>
+          <span class="chip">天氣</span>
+          <span class="chip">台詞</span>
+          <span class="chip">聲音</span>
+          <span class="chip">節奏</span>
+          <span class="chip">連續性</span>
+        </div>
+      </div>
+      <div class="hero-grid">
+        <div class="info-card">
+          <strong>一句話原則</strong>
+          圖生影片時，輸入圖負責「長什麼樣」，提示詞負責「怎麼動、怎麼拍、怎麼聽起來」。
+        </div>
+        <div class="info-card">
+          <strong>預設安全寫法</strong>
+          單場景、正向描述、動作具體、鏡頭明確、聲音獨立成句、避免把整段故事塞進 5 到 10 秒。
+        </div>
+        <div class="info-card">
+          <strong>重要補充</strong>
+          你沒提到但很關鍵的部分包括：源圖品質、鏡頭時長、構圖與鏡頭焦段、時間變化、角色一致性、負向提示、縱橫比、首尾幀與種子控制。
+        </div>
+      </div>
+    </section>
+
+    <div class="quick-nav">
+      <div class="panel">
+        <nav class="nav-links">
+          <a href="#core">底層原則</a>
+          <a href="#formula">提示詞公式</a>
+          <a href="#camera">運鏡與鏡頭</a>
+          <a href="#motion">人物與場景動作</a>
+          <a href="#style">光線天氣風格</a>
+          <a href="#audio">台詞與聲音</a>
+          <a href="#advanced">補充關鍵項</a>
+          <a href="#mistakes">常見錯誤</a>
+          <a href="#templates">模板與示例</a>
+          <a href="#sources">參考來源</a>
+        </nav>
+      </div>
+    </div>
+
+    <main class="content">
+      <section class="section" id="core">
+        <div class="section-head">
+          <div>
+            <span class="kicker">Core Rules</span>
+            <h2>底層原則</h2>
+            <p>綜合 Google Veo 與 Runway 官方提示指南後，可以提煉出一套跨模型都相對穩妥的寫法。下面這些規則優先級高於堆砌華麗形容詞。</p>
+          </div>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <h3>1. 先寫動態，不重寫畫面</h3>
+            <p>輸入圖已經提供主體、場景、構圖、色彩與基礎光線。文字應優先補充：</p>
+            <ul class="list-tight">
+              <li>鏡頭運動</li>
+              <li>人物動作與表情變化</li>
+              <li>環境動畫與氣氛變化</li>
+              <li>節奏、聲音、台詞</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>2. 一個提示詞盡量只做一個鏡頭</h3>
+            <p>短影片模型更適合單一瞬間，而不是連續三段故事。把「A 然後 B 然後 C」拆成多個鏡頭，通常比一條長提示更穩定。</p>
+          </article>
+          <article class="card">
+            <h3>3. 用具體動作替代抽象情緒</h3>
+            <p>不要只寫「很有希望感」「非常史詩」，最好翻譯成可執行動作，例如「slow dolly in（緩慢推進鏡頭）」「她先停頓，再抬頭微笑」「fog rolls in（霧緩慢湧入）」。</p>
+          </article>
+        </div>
+        <div class="warn" style="margin-top:16px;">
+          跨模型預設建議：優先用正向描述。部分平台支援單獨的負向提示，但在主提示裡大量寫「不要」「別出現」往往會降低可控性。若模型明確支援負向提示，建議把不想要的元素寫成名詞列表，而不是口語化禁令。
+        </div>
+      </section>
+
+      <section class="section" id="formula">
+        <div class="section-head">
+          <div>
+            <span class="kicker">Formula</span>
+            <h2>通用提示詞公式</h2>
+            <p>這不是必須每次都寫滿的模板，而是一份完整清單。圖生影片時，至少要把鏡頭、主體動作、環境變化三層動態寫清楚。</p>
+          </div>
+        </div>
+        <div class="formula">
+          <div class="formula-line">[鏡頭/機位] + [主體動作] + [場景/環境動態] + [光線/天氣/氛圍] + [風格/材質/攝影語言] + [節奏/時間變化] + [台詞/聲音/音樂] + [連續性/約束]</div>
+          <div class="note">如果輸入圖資訊很完整，可以把「場景、光線、主體外觀」的靜態描述壓縮，只寫變化部分。</div>
+        </div>
+        <div class="grid-4" style="margin-top:16px;">
+          <article class="card">
+            <h3>鏡頭</h3>
+            <p>close-up（近景/特寫）, medium shot（中景）, wide shot（廣角/遠景）, over-the-shoulder（越肩鏡頭）, POV（主觀視角）, low-angle（低機位仰拍）, dolly in（推進鏡頭）, pan left（向左平移）, handheld（手持）, locked camera（固定機位）</p>
+          </article>
+          <article class="card">
+            <h3>主體動作</h3>
+            <p>turns slowly（緩慢轉身）, nods（點頭）, glances back（回頭看）, breathes softly（輕輕呼吸）, smiles faintly（淡淡微笑）, raises her hand（抬手）, begins walking（開始行走）, hair fluttering（頭髮輕拂擺動）</p>
+          </article>
+          <article class="card">
+            <h3>環境變化</h3>
+            <p>fog rolls in（霧氣湧入）, dust trails behind（塵土拖尾揚起）, neon reflections ripple（霓虹倒影泛起波紋）, leaves drift across frame（樹葉飄過畫面）, rain intensifies（雨勢加大）, candles flicker（燭光閃爍）</p>
+          </article>
+          <article class="card">
+            <h3>聲音層</h3>
+            <p>Only the rain and distant traffic can be heard.（只能聽見雨聲和遠處車流聲。） She says: 我終於找到你了。 Her voice is calm and breathy.（她的聲音平靜、輕柔，帶一點氣聲。）</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="camera">
+        <div class="section-head">
+          <div>
+            <span class="kicker">Camera</span>
+            <h2>運鏡、機位、焦段與鏡頭語言</h2>
+            <p>運鏡是圖生影片最容易見效的控制項。相同圖片，只要鏡頭詞換掉，最終情緒就會明顯變化。</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>類型</th>
+                <th>關鍵詞</th>
+                <th>效果</th>
+                <th>適合寫法</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>固定鏡頭</td>
+                <td>locked camera / static shot（固定鏡頭 / 靜態鏡頭）</td>
+                <td>穩定、克制、強調主體或環境自身的變化</td>
+                <td>Locked camera（固定鏡頭）. 她的頭髮被風輕輕吹起，背景燈光緩慢閃爍。</td>
+              </tr>
+              <tr>
+                <td>平移</td>
+                <td>pan left / pan right（向左平移 / 向右平移）</td>
+                <td>橫向展示空間或跟隨視線</td>
+                <td>Slow pan left across the alley, revealing wet neon reflections.（鏡頭緩慢向左平移穿過小巷，帶出潮濕地面的霓虹倒影。）</td>
+              </tr>
+              <tr>
+                <td>俯仰</td>
+                <td>tilt up / tilt down（上搖 / 下搖）</td>
+                <td>從細節抬升到全貌，或從人物表情落到關鍵物件</td>
+                <td>Tilt down from her face to the letter in her hands.（鏡頭從她的臉慢慢下搖到她手中的信件。）</td>
+              </tr>
+              <tr>
+                <td>推拉</td>
+                <td>dolly in / dolly out（推進 / 拉遠）</td>
+                <td>強化情緒、壓迫感、孤獨感或揭示關係</td>
+                <td>Slow dolly in on the subject as she realizes the truth.（當她意識到真相時，鏡頭緩慢向她推進。）</td>
+              </tr>
+              <tr>
+                <td>橫移跟拍</td>
+                <td>truck left / truck right / tracking shot（橫移左 / 橫移右 / 跟拍鏡頭）</td>
+                <td>跟隨主體運動，動作感更強</td>
+                <td>The camera tracks the runner from the side.（鏡頭從側面跟拍奔跑者。）</td>
+              </tr>
+              <tr>
+                <td>升降</td>
+                <td>pedestal up / pedestal down / crane shot（升降機位 / 起重臂鏡頭）</td>
+                <td>揭示規模感、建築感、史詩感</td>
+                <td>Crane shot rising above the crowd to reveal the square.（起重臂鏡頭越過人群升起，露出整個廣場。）</td>
+              </tr>
+              <tr>
+                <td>空中鏡頭</td>
+                <td>aerial shot / drone shot（航拍鏡頭 / 無人機鏡頭）</td>
+                <td>地形、風景、全景展開</td>
+                <td>A sweeping aerial drone shot rises from street level.（一個流暢的無人機航拍鏡頭從街道高度向上升起。）</td>
+              </tr>
+              <tr>
+                <td>手持</td>
+                <td>handheld / shaky cam（手持鏡頭 / 晃動鏡頭）</td>
+                <td>真實、緊張、即時感</td>
+                <td>Handheld camera follows him through the crowded market.（手持鏡頭跟著他穿過擁擠的市場。）</td>
+              </tr>
+              <tr>
+                <td>環繞</td>
+                <td>arc shot（環繞鏡頭）</td>
+                <td>浪漫、揭示主體、戲劇化空間關係</td>
+                <td>An arc shot circles around the couple in the rain.（鏡頭在雨中環繞這對情侶移動。）</td>
+              </tr>
+              <tr>
+                <td>急甩</td>
+                <td>whip pan（快速甩鏡）</td>
+                <td>快速轉場、混亂、突發事件</td>
+                <td>Whip pan from the window to the man entering the room.（鏡頭從窗邊快速甩到走進房間的男人。）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="grid-2" style="margin-top:16px;">
+          <article class="card">
+            <h3>機位與構圖詞</h3>
+            <div class="chips">
+              <span class="chip">close-up（近景/特寫）</span>
+              <span class="chip">extreme close-up（大特寫）</span>
+              <span class="chip">medium shot（中景）</span>
+              <span class="chip">full shot（全身鏡頭）</span>
+              <span class="chip">wide shot（遠景）</span>
+              <span class="chip">establishing shot（建立鏡頭）</span>
+              <span class="chip">over-the-shoulder（越肩鏡頭）</span>
+              <span class="chip">POV（主觀視角）</span>
+              <span class="chip">low-angle（低角度）</span>
+              <span class="chip">high-angle（高角度）</span>
+              <span class="chip">bird's-eye view（俯視視角）</span>
+              <span class="chip">Dutch angle（傾斜鏡頭）</span>
+            </div>
+            <p>寫法建議：先決定「觀眾距離主體多近」，再決定「鏡頭從哪裡看」。對話、情緒、壓迫感、場景建立，依賴的都是這些詞。</p>
+          </article>
+          <article class="card">
+            <h3>鏡頭光學詞</h3>
+            <div class="chips">
+              <span class="chip">shallow depth of field（淺景深）</span>
+              <span class="chip">bokeh（散景/虛化光斑）</span>
+              <span class="chip">rack focus（焦點轉移）</span>
+              <span class="chip">dolly zoom（推拉變焦）</span>
+              <span class="chip">35mm film（35 毫米膠片質感）</span>
+              <span class="chip">50mm lens（50 毫米鏡頭）</span>
+              <span class="chip">anamorphic widescreen（變形寬銀幕）</span>
+              <span class="chip">macro cinematography（微距電影攝影）</span>
+            </div>
+            <p>這些詞會影響「像什麼鏡頭拍的」，比單純寫「電影感」更有效。鏡頭感不夠時，優先補光學詞與機位詞，而不是繼續堆情緒詞。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="motion">
+        <div class="section-head">
+          <div>
+            <span class="kicker">Motion</span>
+            <h2>人物動作、表情變化、場景動態、時間節奏</h2>
+            <p>最穩妥的動效寫法是三層分開寫：主體怎麼動，環境怎麼動，時間怎麼推進。不要讓所有東西同時劇烈變化。</p>
+          </div>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <h3>人物動作</h3>
+            <ul class="list-tight">
+              <li>身體：walks forward（向前走）, leans in（向前靠近）, turns slowly（緩慢轉身）, steps back（後退一步）, reaches out（伸手）</li>
+              <li>手部：raises her hand（抬起手）, grips the cup（握緊杯子）, fingers tap lightly（手指輕敲）</li>
+              <li>頭部：nods（點頭）, glances sideways（側目看去）, looks down（低頭）, tilts his head（歪頭）</li>
+              <li>細微動作：breathes softly（輕輕呼吸）, blinks slowly（慢慢眨眼）, lips part slightly（嘴唇微微張開）</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>表情與情緒</h3>
+            <ul class="list-tight">
+              <li>不要只寫「sad（悲傷）」或「hopeful（充滿希望）」</li>
+              <li>改寫成可觀察動作：her eyes widen（她睜大眼睛）, her smile fades（她的笑意慢慢消失）, he hesitates before speaking（他說話前先遲疑了一下）</li>
+              <li>情緒變化寫成順序：先停頓，再抬頭，再露出釋然微笑</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>環境動態</h3>
+            <ul class="list-tight">
+              <li>天氣：rain intensifies（雨勢變大）, snow drifts across frame（雪花飄過畫面）</li>
+              <li>空氣：fog rolls in（霧氣湧入）, dust floats in the sunbeam（灰塵漂浮在光束裡）</li>
+              <li>燈光：neon signs flicker（霓虹招牌閃爍）, candlelight trembles（燭光輕顫）</li>
+              <li>物件：curtains sway（窗簾擺動）, leaves scatter（樹葉飄散）, reflections ripple（倒影泛起漣漪）</li>
+            </ul>
+          </article>
+        </div>
+        <div class="table-wrap" style="margin-top:16px;">
+          <table>
+            <thead>
+              <tr>
+                <th>動態類型</th>
+                <th>推薦程度</th>
+                <th>說明</th>
+                <th>例句</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>輕微人物動作</td>
+                <td>很高</td>
+                <td>最穩定，特別適合肖像、產品、靜態構圖</td>
+                <td>The subject blinks slowly and takes a soft breath.（主體慢慢眨眼並輕輕吸了一口氣。）</td>
+              </tr>
+              <tr>
+                <td>鏡頭運動 + 主體輕動</td>
+                <td>很高</td>
+                <td>最常用組合，畫面容易顯得高級</td>
+                <td>Slow dolly in. Her hair moves gently in the wind.（鏡頭緩慢推進，她的頭髮在風中輕輕擺動。）</td>
+              </tr>
+              <tr>
+                <td>主體強動作</td>
+                <td>中等</td>
+                <td>容易出肢體扭曲，最好動作具體且不複雜</td>
+                <td>He turns and begins walking toward the doorway.（他轉身朝門口走去。）</td>
+              </tr>
+              <tr>
+                <td>大範圍環境變化</td>
+                <td>中等</td>
+                <td>適合雲層、煙霧、雨雪、火焰、塵土</td>
+                <td>Fog slowly fills the background as streetlights glow.（霧氣慢慢充滿背景，街燈開始發亮。）</td>
+              </tr>
+              <tr>
+                <td>多重變形或多場景切換</td>
+                <td>較低</td>
+                <td>短影片裡最容易失控，建議拆鏡頭</td>
+                <td>不建議一條提示裡同時寫變形、轉場、天氣突變和鏡頭旋轉</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card" style="margin-top:16px;">
+          <h3>時間與節奏詞</h3>
+          <div class="chips">
+            <span class="chip">slowly（緩慢地）</span>
+            <span class="chip">gently（輕柔地）</span>
+            <span class="chip">subtle（細微的）</span>
+            <span class="chip">rhythmic（有節奏的）</span>
+            <span class="chip">sudden（突然的）</span>
+            <span class="chip">time-lapse（延時變化）</span>
+            <span class="chip">gradual change（漸變）</span>
+            <span class="chip">evolution（逐步演化）</span>
+            <span class="chip">fast-paced（快節奏）</span>
+          </div>
+          <p>節奏詞負責控制「動得多快、變化多明顯」。沒有節奏詞時，模型常會自行決定速度，導致表演或環境變化過猛。</p>
+        </div>
+      </section>
+
+      <section class="section" id="style">
+        <div class="section-head">
+          <div>
+            <span class="kicker">Style</span>
+            <h2>光線、天氣、色彩、攝影風格與質感</h2>
+            <p>這部分決定影片像「什麼類型的鏡頭」。它不只影響美術風格，也會影響節奏、真實度、氛圍與空間層次。</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <article class="card">
+            <h3>光線寫法</h3>
+            <ul class="list-tight">
+              <li>自然光：soft morning sunlight（柔和晨光）, overcast daylight（陰天日光）, moonlight（月光）</li>
+              <li>人工光：warm fireplace glow（壁爐暖光）, candlelight（燭光）, harsh fluorescent lighting（刺眼螢光燈）, pulsating neon（跳動霓虹光）</li>
+              <li>電影布光：Rembrandt lighting（倫勃朗布光）, low-key lighting（低調光）, high-key lighting（高調光）, dramatic side lighting（戲劇性側光）</li>
+              <li>特效光：volumetric lighting（體積光）, backlighting silhouette（逆光剪影）, golden hour glow（黃金時刻暖光）, lens flare（鏡頭炫光）</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>天氣與氛圍寫法</h3>
+            <ul class="list-tight">
+              <li>天氣：light drizzle（小雨）, heavy thunderstorm（暴風雨）, gentle snowfall（輕雪）, swirling fog（盤旋霧氣）</li>
+              <li>空氣細節：floating dust motes（漂浮塵埃）, shimmering heat haze（熱浪抖動）, wet pavement reflections（濕地反光）</li>
+              <li>色盤：muted earthy tones（低飽和大地色）, cool blue and silver palette（冷藍銀色調）, warm autumn colors（暖秋色）</li>
+              <li>情緒：melancholic（憂鬱）, suspenseful（懸疑）, serene（寧靜）, epic（史詩感）, romantic（浪漫）, horror（驚悚）</li>
+            </ul>
+          </article>
+        </div>
+        <div class="table-wrap" style="margin-top:16px;">
+          <table>
+            <thead>
+              <tr>
+                <th>目標效果</th>
+                <th>推薦關鍵詞</th>
+                <th>提示詞思路</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>高級電影感</td>
+                <td>cinematic film look（電影膠片感）, 35mm film（35 毫米膠片）, anamorphic widescreen（變形寬銀幕）, shallow depth of field（淺景深）</td>
+                <td>用鏡頭、焦段、景深詞，比直接寫「高級電影感」更穩。</td>
+              </tr>
+              <tr>
+                <td>紀實感</td>
+                <td>handheld（手持）, realistic documentary（紀實風格）, natural light（自然光）, slight motion blur（輕微運動模糊）</td>
+                <td>讓鏡頭不那麼完美，動作更自然。</td>
+              </tr>
+              <tr>
+                <td>廣告質感</td>
+                <td>clean studio lighting（乾淨棚拍光）, crisp reflections（清晰反射）, macro cinematography（微距電影攝影）, polished surfaces（拋光表面）</td>
+                <td>強調材質、輪廓光、轉動或輕微推鏡。</td>
+              </tr>
+              <tr>
+                <td>動畫感</td>
+                <td>smooth animation（流暢動畫）, stop motion（定格動畫）, Japanese anime style（日式動畫風格）, cel-shaded（賽璐璐渲染）</td>
+                <td>如果你要的是「像動畫」，必須顯式寫出來。</td>
+              </tr>
+              <tr>
+                <td>復古/懷舊</td>
+                <td>sepia tone（棕褐色調）, grainy film（膠片顆粒感）, vintage 1920s（20 年代復古風）, 1980s vaporwave（80 年代蒸氣波）</td>
+                <td>年代風格最好加上膠片、顆粒、色調詞一起寫。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="audio">
+        <div class="section-head">
+          <div>
+            <span class="kicker">Audio</span>
+            <h2>台詞、聲音、環境音、配樂</h2>
+            <p>如果模型支援原生音訊，聲音不要混在視覺句子裡，最好單獨成句。官方文件尤其強調：寫對白時用冒號，不要用引號，以免把文字直接渲染進畫面。</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <article class="card">
+            <h3>台詞寫法</h3>
+            <ul class="list-tight">
+              <li>推薦：She says: 我終於找到你了。（她說：我終於找到你了。）</li>
+              <li>不推薦：She says "我終於找到你了。"（不要使用引號包裹對白。）</li>
+              <li>台詞盡量短，句子清晰，方便口型和節奏穩定</li>
+              <li>多人對話要明確誰說、誰回應</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>聲音分層</h3>
+            <ul class="list-tight">
+              <li>人聲：voiceover（旁白）, whispering（低聲耳語）, calm tone（平靜語氣）, urgent tone（急促語氣）, British accent（英式口音）</li>
+              <li>環境音：rain on the window（雨打窗戶）, distant traffic（遠處車流）, waves crashing（海浪拍岸）, office hum（辦公室環境嗡鳴）</li>
+              <li>音效：phone ringing（電話鈴聲）, footsteps（腳步聲）, fabric rustling（布料摩擦聲）, ticking clock（時鐘滴答聲）</li>
+              <li>音樂：gentle atmospheric soundtrack（輕柔氛圍配樂）, tense cinematic pulse（緊張電影感脈衝配樂）</li>
+            </ul>
+          </article>
+        </div>
+        <div class="prompt-block" style="margin-top:16px;">
+          <button class="copy-btn" type="button">複製</button>
+          <pre>[English Prompt]
+Medium shot in a dimly lit room. The woman looks up from the old letter and slowly exhales. Locked camera. Candlelight flickers softly across her face. She says: 我終於明白了。 Her voice is low, tired, and slightly trembling. Only the faint rain on the window and the ticking of a wall clock can be heard.
+
+[中文釋義]
+昏暗房間裡的中景鏡頭。女人從舊信件上抬起頭，緩緩吐出一口氣。固定鏡頭。燭光在她臉上輕輕閃動。她說：我終於明白了。她的聲音低沉、疲憊，微微發顫。只能聽見窗邊細雨聲和牆上時鐘的滴答聲。</pre>
+        </div>
+        <div class="warn" style="margin-top:16px;">
+          如果當前平台不支援原生音訊，也仍然可以把「說話狀態」寫成視覺動作，例如 lips move softly（嘴唇輕輕開合）, he speaks calmly（他平靜地說話）。真正台詞內容與配音可放到後期處理。
+        </div>
+      </section>
+
+      <section class="section" id="advanced">
+        <div class="section-head">
+          <div>
+            <span class="kicker">Advanced</span>
+            <h2>你沒提到但很重要的部分</h2>
+            <p>這些項目對成片品質影響很大，經常比多加幾個形容詞更有價值。</p>
+          </div>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <h3>源圖品質</h3>
+            <p>源圖越清晰、構圖越穩定、主體越明確，影片越容易連貫。圖生影片把輸入圖當成第一幀，所以模糊、壓縮、肢體錯誤、奇怪反光都會被繼承。</p>
+          </article>
+          <article class="card">
+            <h3>縱橫比</h3>
+            <p>16:9 適合橫屏敘事和大場景，9:16 適合人像、建築、短影片平台。不要先寫完提示詞再想比例，比例會反過來影響構圖和鏡頭詞。</p>
+          </article>
+          <article class="card">
+            <h3>角色一致性</h3>
+            <p>跨鏡頭生成時，角色名、不可變外觀、衣著、聲音特徵要固定複用。支援 seed 或首尾幀的平台，優先結合使用。</p>
+          </article>
+          <article class="card">
+            <h3>時間變化</h3>
+            <p>time-lapse（延時變化）、gradual change（漸進變化）、sunset to night（從日落過渡到夜晚）、flower blooming（花朵綻放）這類詞可以控制「過程感」，很適合靜圖起手的鏡頭。</p>
+          </article>
+          <article class="card">
+            <h3>剪輯術語</h3>
+            <p>match cut（匹配剪輯）、jump cut（跳切）、montage（蒙太奇）、split diopter（分焦鏡頭）等詞可用於更強的視聽語言，但複雜度更高，建議在基礎動態穩定後再加。</p>
+          </article>
+          <article class="card">
+            <h3>負向提示</h3>
+            <p>跨模型安全做法仍然是先把正向提示寫清。若平台支援單獨負向提示，盡量用元素名詞列表，如 text（文字）, watermark（水印）, extra fingers（多餘手指），而不是口語化命令。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="mistakes">
+        <div class="section-head">
+          <div>
+            <span class="kicker">Mistakes</span>
+            <h2>最常見的 8 個錯誤</h2>
+            <p>這些錯誤會直接降低可控性，尤其是圖生影片場景。</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <article class="card">
+            <h3>錯誤寫法</h3>
+            <ol class="list-tight">
+              <li>把圖片裡已經存在的主體、背景、光線再完整描述一遍</li>
+              <li>一條提示裡同時寫三個劇情節點</li>
+              <li>只寫情緒，不寫動作</li>
+              <li>鏡頭、人物、天氣、特效全部同時劇烈變化</li>
+              <li>使用會話式或命令式語言：please（請）, can you（你能否）, make it（把它做成）</li>
+              <li>在主提示中大量寫 no（不要）/ don't（別）/ 不要</li>
+              <li>對白加引號，導致模型誤判為要出文字</li>
+              <li>人物動作過於複雜，如連續翻滾、轉身、變形、跳躍同時發生</li>
+            </ol>
+          </article>
+          <article class="card">
+            <h3>替代思路</h3>
+            <ol class="list-tight">
+              <li>只補動態：camera（鏡頭）, subject（主體）, environment（環境）</li>
+              <li>拆成鏡頭 1、鏡頭 2、鏡頭 3</li>
+              <li>把情緒翻譯成表情和節奏</li>
+              <li>每次先控制一到兩層動態</li>
+              <li>改成直接描述畫面結果</li>
+              <li>正向描述優先，負向放獨立欄位</li>
+              <li>對白用冒號，不用引號</li>
+              <li>先從輕動作開始，再逐步增加複雜度</li>
+            </ol>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="templates">
+        <div class="section-head">
+          <div>
+            <span class="kicker">Templates</span>
+            <h2>可直接套用的模板與示例</h2>
+            <p>下面的示例刻意寫成「輸入圖已存在」的圖生影片口徑。你可以直接替換主體、動作、場景和聲音層。</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="prompt-block">
+            <button class="copy-btn" type="button">複製</button>
+            <pre>[肖像微動作模板]
+[English Prompt]
+Close-up portrait. Locked camera. The subject blinks slowly and takes a soft breath. Her hair moves gently in the wind. Warm golden hour light. Shallow depth of field. Calm, intimate mood.
+
+[中文釋義]
+人像近景特寫。固定鏡頭。主體慢慢眨眼，輕輕吸一口氣。她的頭髮在風中輕柔擺動。黃金時刻的暖光。淺景深。整體氛圍平靜而親密。</pre>
+          </div>
+          <div class="prompt-block">
+            <button class="copy-btn" type="button">複製</button>
+            <pre>[環境推進模板]
+[English Prompt]
+Wide shot. Slow dolly in toward the subject. Fog rolls in across the ground while leaves drift through the frame. Overcast daylight. Muted earthy tones. Quiet, suspenseful atmosphere.
+
+[中文釋義]
+遠景鏡頭。鏡頭緩慢向主體推進。霧氣沿地面湧入，樹葉從畫面中飄過。陰天日光。低飽和大地色。整體安靜而帶有懸疑感。</pre>
+          </div>
+          <div class="prompt-block">
+            <button class="copy-btn" type="button">複製</button>
+            <pre>[產品廣告模板]
+[English Prompt]
+Macro cinematography. Slow rotating camera move around the bottle. Crisp studio lighting creates clean reflections on the glass surface. Tiny water droplets slide down slowly. Premium commercial look.
+
+[中文釋義]
+微距電影攝影。鏡頭緩慢環繞瓶身旋轉。清晰的棚拍燈光在玻璃表面形成乾淨反射。細小水珠緩慢滑落。整體是高端商業廣告質感。</pre>
+          </div>
+          <div class="prompt-block">
+            <button class="copy-btn" type="button">複製</button>
+            <pre>[對話模板]
+[English Prompt]
+Medium shot. The man looks out the window, then turns back toward the camera. Low-key lighting. He says: 現在已經太晚了。 His voice is calm and controlled. Only distant traffic and soft rain can be heard.
+
+[中文釋義]
+中景鏡頭。男人先看向窗外，然後轉頭看向鏡頭。低調光照明。他說：現在已經太晚了。聲音平靜而克制。只能聽見遠處車流和輕微雨聲。</pre>
+          </div>
+        </div>
+        <div class="grid-3" style="margin-top:16px;">
+          <article class="card">
+            <h3>示例 1：賽博雨夜人像</h3>
+            <div class="prompt-block" style="margin-top:10px;">
+              <button class="copy-btn" type="button">複製</button>
+              <pre>[English Prompt]
+Medium close-up. Slow dolly in on the subject. She lifts her eyes toward the camera and gives a faint, knowing smile. Neon reflections ripple on the wet street behind her. Light rain falls through the frame. Low-key lighting with cool blue and magenta tones. Cinematic film look, shallow depth of field.
+
+[中文釋義]
+中近景鏡頭。鏡頭緩慢向主體推進。她抬眼看向鏡頭，露出一個淡淡而意味深長的微笑。她身後潮濕街道上的霓虹倒影泛起波紋。小雨落入畫面。冷藍與洋紅色調的低調光。整體是電影膠片感和淺景深效果。</pre>
+            </div>
+          </article>
+          <article class="card">
+            <h3>示例 2：古風雪景</h3>
+            <div class="prompt-block" style="margin-top:10px;">
+              <button class="copy-btn" type="button">複製</button>
+              <pre>[English Prompt]
+Full shot. Locked camera. The subject slowly turns sideways, sleeves and hair fluttering in the winter wind. Gentle snowfall drifts across the foreground. The lantern light flickers softly. Cold moonlit night, quiet and melancholic mood.
+
+[中文釋義]
+全身鏡頭。固定機位。主體緩慢側身，衣袖和髮絲在冬風中飄動。細雪從前景輕輕飄過。燈籠的光柔和閃爍。冷色月夜，整體安靜而帶有淡淡憂鬱感。</pre>
+            </div>
+          </article>
+          <article class="card">
+            <h3>示例 3：懸疑對話</h3>
+            <div class="prompt-block" style="margin-top:10px;">
+              <button class="copy-btn" type="button">複製</button>
+              <pre>[English Prompt]
+Over-the-shoulder medium shot. The detective leans forward slightly while the suspect avoids eye contact. A slow rack focus shifts attention from the detective's hand to the suspect's face. Dim interrogation room, a single overhead bulb. The detective says: 你的故事還缺了一部分。 Only the ticking clock and distant rain can be heard.
+
+[中文釋義]
+越肩中景鏡頭。偵探微微前傾，而嫌疑人迴避眼神接觸。鏡頭透過緩慢焦點轉移，把注意力從偵探的手移到嫌疑人的臉上。昏暗的審訊室裡只有一盞頭頂燈。偵探說：你的故事還缺了一部分。只能聽見時鐘滴答聲和遠處雨聲。</pre>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="sources">
+        <div class="section-head">
+          <div>
+            <span class="kicker">Sources</span>
+            <h2>參考來源與整理依據</h2>
+            <p>以下內容優先參考官方文件，再做跨模型歸納。帶有「跨模型預設建議」的部分屬於基於官方規則做出的通用化整理。</p>
+          </div>
+        </div>
+        <div class="source-list">
+          <div class="source-item">
+            <a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide" target="_blank" rel="noreferrer">Google Cloud: Veo on Vertex AI video generation prompt guide</a>
+            <small>用於提煉主體、動作、場景、機位、鏡頭運動、光線、風格、氛圍、時間元素、音訊、對白、電影術語、負向提示等結構。</small>
+          </div>
+          <div class="source-item">
+            <a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/best-practice" target="_blank" rel="noreferrer">Google Cloud: Best practices for Veo on Vertex AI</a>
+            <small>用於提煉圖生影片重點規則，包括源圖品質、只寫動態、泛稱角色、鏡頭運動三分法、短影片單場景、對白不用引號、縱橫比與一致性。</small>
+          </div>
+          <div class="source-item">
+            <a href="https://help.runwayml.com/hc/en-us/articles/39789879462419-Gen-4-Video-Prompting-Guide" target="_blank" rel="noreferrer">Runway: Gen-4 Video Prompting Guide</a>
+            <small>用於提煉圖生影片的迭代邏輯：從簡單開始，逐個增加 subject motion、camera motion、scene motion、style descriptors，並強調正向措辭。</small>
+          </div>
+          <div class="source-item">
+            <a href="https://help.runwayml.com/hc/en-us/articles/23996932381203-How-to-prompt-within-Runway" target="_blank" rel="noreferrer">Runway: How to prompt within Runway</a>
+            <small>用於補充「不要會話式、不要命令式、一個提示只描述一個鏡頭、盡量描述鏡頭看到什麼」的原則。</small>
+          </div>
+          <div class="source-item">
+            <a href="https://help.runwayml.com/hc/en-us/articles/34926468947347-Creating-with-Camera-Control-on-Gen-3-Alpha-Turbo" target="_blank" rel="noreferrer">Runway: Creating with Camera Control on Gen-3 Alpha Turbo</a>
+            <small>用於補充運鏡方向、強度、靜態鏡頭、文字提示如何配合鏡頭控制等方法。</small>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      頁面生成時間：2026-03-08。適用範圍：圖生影片提示詞寫法與鏡頭語言整理。注意：不同平台對英文電影術語、負向提示、原生音訊、首尾幀、seed 的支援程度會不同，實際使用時請結合當前模型能力微調。
+    </footer>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.copy-btn');
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', async () => {
+        const block = button.parentElement.querySelector('pre');
+        if (!block) return;
+
+        try {
+          await navigator.clipboard.writeText(block.textContent.trim());
+          const original = button.textContent;
+          button.textContent = '已複製';
+          setTimeout(() => {
+            button.textContent = original;
+          }, 1200);
+        } catch (error) {
+          button.textContent = '複製失敗';
+          setTimeout(() => {
+            button.textContent = '複製';
+          }, 1200);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
